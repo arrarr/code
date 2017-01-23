@@ -1,0 +1,39 @@
+import RPi.GPIO as GPIO 
+import time 
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+
+
+tim = 0.5
+
+GPIO.setup(21,GPIO.IN)
+GPIO.setup(12,GPIO.IN)
+GPIO.setup(25,GPIO.IN)
+
+
+#FuncTion 1
+def led1():
+	print ("TEST 1")
+#FuncTion 2
+def led2():
+	print ("TEST 2")
+#FuncTion 3
+def led3():
+	print ("TEST 3")
+
+#Loop
+while True:
+	if not GPIO.input(21):
+		led1()
+		time.sleep(tim)
+    
+	if not GPIO.input(12):
+		led2()
+		time.sleep(tim)
+    
+	if not GPIO.input(25):
+		led3()
+		time.sleep(tim)
+  
+GPIO.cleanup()
