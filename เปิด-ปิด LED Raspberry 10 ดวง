@@ -1,0 +1,740 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>เปิด ปิด ไฟส่องสว่าง ผ่าน WIFI</title>
+</head>
+
+<body>
+
+<form method="get" action="index.php">
+
+  <center>
+  <table width="300" border="1">
+    <tbody>
+      <tr>
+        <td style="text-align: center">ลำดับ</td>
+        <td style="text-align: center">ชื่อ</td>
+        <td style="text-align: center">เปิด</td>
+        <td style="text-align: center">ปิด</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">1</td>
+        <td style="text-align: center">หลอดที่ 1</td>
+        <td style="text-align: center"><input type="submit" name="LED1_ON" id="LED1_ON" value="เปิด"></td>
+        <td style="text-align: center"><input type="submit" name="LED1_OFF" id="LED1_OFF" value="ปิด"></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">2</td>
+        <td style="text-align: center">หลอดที่ 2</td>
+        <td style="text-align: center"><input type="submit" name="LED2_ON" id="LED2_ON" value="เปิด"></td>
+        <td style="text-align: center"><input type="submit" name="LED2_OFF" id="LED2_OFF" value="ปิด"></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">3</td>
+        <td style="text-align: center">หลอดที่ 3</td>
+        <td style="text-align: center"><input type="submit" name="LED3_ON" id="LED2_ON" value="เปิด"></td>
+        <td style="text-align: center"><input type="submit" name="LED3_OFF" id="LED2_OFF" value="ปิด"></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">4</td>
+        <td style="text-align: center">หลอดที่ 4</td>
+        <td style="text-align: center"><input type="submit" name="LED4_ON" id="LED4_ON" value="เปิด"></td>
+        <td style="text-align: center"><input type="submit" name="LED4_OFF" id="LED4_OFF" value="ปิด"></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">5</td>
+        <td style="text-align: center">หลอดที่ 5</td>
+        <td style="text-align: center"><input type="submit" name="LED5_ON" id="LED5_ON" value="เปิด"></td>
+        <td style="text-align: center"><input type="submit" name="LED5_OFF" id="LED5_OFF" value="ปิด"></td>
+      <tr>
+        <td style="text-align: center">6</td>
+        <td style="text-align: center">หลอดที่ 6</td>
+        <td style="text-align: center"><input type="submit" name="LED6_ON" id="LED6_ON" value="เปิด"></td>
+        <td style="text-align: center"><input type="submit" name="LED6_OFF" id="LED6_OFF" value="ปิด"></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">7</td>
+        <td style="text-align: center">หลอดที่ 7</td>
+        <td style="text-align: center"><input type="submit" name="LED7_ON" id="LED7_ON" value="เปิด"></td>
+        <td style="text-align: center"><input type="submit" name="LED7_OFF" id="LED7_OFF" value="ปิด"></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">8</td>
+        <td style="text-align: center">หลอดที่ 8</td>
+        <td style="text-align: center"><input type="submit" name="LED8_ON" id="LED8_ON" value="เปิด"></td>
+        <td style="text-align: center"><input type="submit" name="LED8_OFF" id="LED8_OFF" value="ปิด"></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">9</td>
+        <td style="text-align: center">หลอดที่ 9</td>
+        <td style="text-align: center"><input type="submit" name="LED9_ON" id="LED9_ON" value="เปิด"></td>
+        <td style="text-align: center"><input type="submit" name="LED9_OFF" id="LED9_OFF" value="ปิด"></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">10</td>
+        <td style="text-align: center">หลอดที่ 10</td>
+        <td style="text-align: center"><input type="submit" name="LED10_ON" id="LED10_ON" value="เปิด"></td>
+        <td style="text-align: center"><input type="submit" name="LED10_OFF" id="LED10_OFF" value="ปิด"></td>
+      </tr>
+      <tr>
+        <td style="text-align: center">11</td>
+        <td style="text-align: center">เปิดไฟทั้งหมด</td>
+        <td style="text-align: center"><input type="submit" name="LEDALL_ON" id="LEDALL_ON" value="เปิด"></td>
+        <td style="text-align: center"><input type="submit" name="LEDALL_OFF" id="LEDALL_OFF" value="ปิด"></td>
+      </tr>
+    </tbody>
+  </table>
+  </center>
+  
+
+
+</form>
+
+<p>
+  <?PHP
+	$setLED1 = shell_exec("/usr/local/bin/gpio -g mode 26 out");
+	if(isset($_GET['LED1_ON']))
+	{
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 26 1");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt1 = fopen("txt/1.txt","w") or die("Unable file");
+		$w_t1 = "1";
+		fwrite($w_txt1,$w_t1);
+		fclose($w_txt1);
+		
+		
+	}
+	else if(isset($_GET['LED1_OFF']))
+	{
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 26 0");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt1 = fopen("txt/1.txt","w") or die("Unable file");
+		$w_t1 = "0";
+		fwrite($w_txt1,$w_t1);
+		fclose($w_txt1);
+		
+	}
+
+
+	$setLED2 = shell_exec("/usr/local/bin/gpio -g mode 19 out");
+	if(isset($_GET['LED2_ON']))
+	{
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 19 1");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt2 = fopen("txt/2.txt","w") or die("Unable file");
+		$w_t2 = "1";
+		fwrite($w_txt2,$w_t2);
+		fclose($w_txt2);
+		
+	}
+	else if(isset($_GET['LED2_OFF']))
+	{
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 19 0");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt2 = fopen("txt/2.txt","w") or die("Unable file");
+		$w_t2 = "0";
+		fwrite($w_txt2,$w_t2);
+		fclose($w_txt2);
+		
+	}
+
+
+	$setLED3 = shell_exec("/usr/local/bin/gpio -g mode 13 out");
+	if(isset($_GET['LED3_ON']))
+	{
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 13 1");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt3 = fopen("txt/3.txt","w") or die("Unable file");
+		$w_t3 = "1";
+		fwrite($w_txt3,$w_t3);
+		fclose($w_txt3);
+		
+	}
+	else if(isset($_GET['LED3_OFF']))
+	{
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 13 0");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt3 = fopen("txt/3.txt","w") or die("Unable file");
+		$w_t3 = "0";
+		fwrite($w_txt3,$w_t3);
+		fclose($w_txt3);
+		
+	}
+
+
+
+
+	$setLED4 = shell_exec("/usr/local/bin/gpio -g mode 6 out");
+	if(isset($_GET['LED4_ON']))
+	{
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 6 1");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt4 = fopen("txt/4.txt","w") or die("Unable file");
+		$w_t4 = "1";
+		fwrite($w_txt4,$w_t4);
+		fclose($w_txt4);
+		
+	}
+	else if(isset($_GET['LED4_OFF']))
+	{
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 6 0");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt4 = fopen("txt/4.txt","w") or die("Unable file");
+		$w_t4 = "0";
+		fwrite($w_txt4,$w_t4);
+		fclose($w_txt4);
+		
+	}
+
+
+
+	$setLED5 = shell_exec("/usr/local/bin/gpio -g mode 5 out");
+	if(isset($_GET['LED5_ON']))
+	{
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 5 1");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt5 = fopen("txt/5.txt","w") or die("Unable file");
+		$w_t5 = "1";
+		fwrite($w_txt5,$w_t5);
+		fclose($w_txt5);
+		
+	}
+	else if(isset($_GET['LED5_OFF']))
+	{
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 5 0");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt5 = fopen("txt/5.txt","w") or die("Unable file");
+		$w_t5 = "0";
+		fwrite($w_txt5,$w_t5);
+		fclose($w_txt5);
+		
+	}
+
+
+
+	$setLED6 = shell_exec("/usr/local/bin/gpio -g mode 22 out");
+	if(isset($_GET['LED6_ON']))
+	{
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 22 1");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt6 = fopen("txt/6.txt","w") or die("Unable file");
+		$w_t6 = "1";
+		fwrite($w_txt6,$w_t6);
+		fclose($w_txt6);
+		
+	}
+	else if(isset($_GET['LED6_OFF']))
+	{
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 22 0");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt6 = fopen("txt/6.txt","w") or die("Unable file");
+		$w_t6 = "0";
+		fwrite($w_txt6,$w_t6);
+		fclose($w_txt6);
+		
+	}
+
+
+
+		$setLED7 = shell_exec("/usr/local/bin/gpio -g mode 27 out");
+	if(isset($_GET['LED7_ON']))
+	{
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 27 1");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt7 = fopen("txt/7.txt","w") or die("Unable file");
+		$w_t7 = "1";
+		fwrite($w_txt7,$w_t7);
+		fclose($w_txt7);
+		
+	}
+	else if(isset($_GET['LED7_OFF']))
+	{
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 27 0");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt7 = fopen("txt/7.txt","w") or die("Unable file");
+		$w_t7 = "0";
+		fwrite($w_txt7,$w_t7);
+		fclose($w_txt7);
+		
+
+	}
+	
+
+
+
+		$setLED8 = shell_exec("/usr/local/bin/gpio -g mode 17 out");
+	if(isset($_GET['LED8_ON']))
+	{
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 17 1");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt8 = fopen("txt/8.txt","w") or die("Unable file");
+		$w_t8 = "1";
+		fwrite($w_txt8,$w_t8);
+		fclose($w_txt8);
+		
+	}
+	else if(isset($_GET['LED8_OFF']))
+	{
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 17 0");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt8 = fopen("txt/8.txt","w") or die("Unable file");
+		$w_t8 = "0";
+		fwrite($w_txt8,$w_t8);
+		fclose($w_txt8);
+		
+	}
+
+
+
+
+		$setLED9 = shell_exec("/usr/local/bin/gpio -g mode 4 out");
+	if(isset($_GET['LED9_ON']))
+	{
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 4 1");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt9 = fopen("txt/9.txt","w") or die("Unable file");
+		$w_t9 = "1";
+		fwrite($w_txt9,$w_t9);
+		fclose($w_txt9);
+		
+
+	}
+	else if(isset($_GET['LED9_OFF']))
+	{
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 4 0");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt9 = fopen("txt/9.txt","w") or die("Unable file");
+		$w_t9 = "0";
+		fwrite($w_txt9,$w_t9);
+		fclose($w_txt9);
+		
+
+	}
+
+
+
+		$setLED10 = shell_exec("/usr/local/bin/gpio -g mode 18 out");
+	if(isset($_GET['LED10_ON']))
+	{
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 18 1");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt10 = fopen("txt/10.txt","w") or die("Unable file");
+		$w_t10 = "1";
+		fwrite($w_txt10,$w_t10);
+		fclose($w_txt10);
+		
+
+	}
+	else if(isset($_GET['LED10_OFF']))
+	{
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 18 0");
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt10 = fopen("txt/10.txt","w") or die("Unable file");
+		$w_t10 = "0";
+		fwrite($w_txt10,$w_t10);
+		fclose($w_txt10);
+		
+	}
+
+
+
+	// LED ALL
+	$setLED1 = shell_exec("/usr/local/bin/gpio -g mode 26 out");
+	$setLED2 = shell_exec("/usr/local/bin/gpio -g mode 19 out");
+	$setLED3 = shell_exec("/usr/local/bin/gpio -g mode 13 out");
+	$setLED4 = shell_exec("/usr/local/bin/gpio -g mode 6 out");
+	$setLED5 = shell_exec("/usr/local/bin/gpio -g mode 5 out");
+	$setLED6 = shell_exec("/usr/local/bin/gpio -g mode 22 out");
+	$setLED7 = shell_exec("/usr/local/bin/gpio -g mode 27 out");
+	$setLED8 = shell_exec("/usr/local/bin/gpio -g mode 17 out");
+	$setLED9 = shell_exec("/usr/local/bin/gpio -g mode 4 out");
+	$setLED10 = shell_exec("/usr/local/bin/gpio -g mode 18 out");
+	
+	
+	if(isset($_GET['LEDALL_ON']))
+	{
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 26 1");
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 19 1");
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 13 1");
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 6 1");
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 5 1");
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 22 1");
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 27 1");
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 17 1");
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 4 1");
+		$gpio_on = shell_exec("/usr/local/bin/gpio -g write 18 1");
+		
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt1 = fopen("txt/1.txt","w") or die("Unable file");
+		$w_t1 = "1";
+		fwrite($w_txt1,$w_t1);
+		fclose($w_txt1);
+		
+		
+		$w_txt2 = fopen("txt/2.txt","w") or die("Unable file");
+		$w_t2 = "2";
+		fwrite($w_txt2,$w_t2);
+		fclose($w_txt2);
+
+		$w_txt3 = fopen("txt/3.txt","w") or die("Unable file");
+		$w_t3 = "3";
+		fwrite($w_txt3,$w_t3);
+		fclose($w_txt3);
+
+		$w_txt4 = fopen("txt/4.txt","w") or die("Unable file");
+		$w_t4 = "4";
+		fwrite($w_txt4,$w_t4);
+		fclose($w_txt4);
+
+		$w_txt5 = fopen("txt/5.txt","w") or die("Unable file");
+		$w_t5 = "5";
+		fwrite($w_txt5,$w_t5);
+		fclose($w_txt5);
+
+		$w_txt6 = fopen("txt/6.txt","w") or die("Unable file");
+		$w_t6 = "6";
+		fwrite($w_txt6,$w_t6);
+		fclose($w_txt6);
+
+		$w_txt7 = fopen("txt/7.txt","w") or die("Unable file");
+		$w_t7 = "7";
+		fwrite($w_txt7,$w_t7);
+		fclose($w_txt7);
+
+		$w_txt8 = fopen("txt/8.txt","w") or die("Unable file");
+		$w_t8 = "8";
+		fwrite($w_txt8,$w_t8);
+		fclose($w_txt8);
+
+		$w_txt9 = fopen("txt/9.txt","w") or die("Unable file");
+		$w_t9 = "9";
+		fwrite($w_txt9,$w_t9);
+		fclose($w_txt9);
+
+		$w_txt10 = fopen("txt/10.txt","w") or die("Unable file");
+		$w_t10 = "10";
+		fwrite($w_txt10,$w_t10);
+		fclose($w_txt10);
+
+		
+	}
+	else if(isset($_GET['LEDALL_OFF']))
+	{
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 26 0");
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 19 0");
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 13 0");
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 6 0");
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 5 0");
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 22 0");
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 27 0");
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 17 0");
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 4 0");
+		$gpio_off = shell_exec("/usr/local/bin/gpio -g write 18 0");
+		
+		//เขียน ไฟล์ ลง TEXTFile
+		$w_txt1 = fopen("txt/1.txt","w") or die("Unable file");
+		$w_t1 = "0";
+		fwrite($w_txt1,$w_t1);
+		fclose($w_txt1);
+
+		
+		$w_txt2 = fopen("txt/2.txt","w") or die("Unable file");
+		$w_t2 = "0";
+		fwrite($w_txt2,$w_t2);
+		fclose($w_txt2);
+
+		$w_txt3 = fopen("txt/3.txt","w") or die("Unable file");
+		$w_t3 = "0";
+		fwrite($w_txt3,$w_t3);
+		fclose($w_txt3);
+
+		$w_txt4 = fopen("txt/4.txt","w") or die("Unable file");
+		$w_t4 = "0";
+		fwrite($w_txt4,$w_t4);
+		fclose($w_txt4);
+
+		$w_txt5 = fopen("txt/5.txt","w") or die("Unable file");
+		$w_t5 = "0";
+		fwrite($w_txt5,$w_t5);
+		fclose($w_txt5);
+
+		$w_txt6 = fopen("txt/6.txt","w") or die("Unable file");
+		$w_t6 = "0";
+		fwrite($w_txt6,$w_t6);
+		fclose($w_txt6);
+
+		$w_txt7 = fopen("txt/7.txt","w") or die("Unable file");
+		$w_t7 = "0";
+		fwrite($w_txt7,$w_t7);
+		fclose($w_txt7);
+
+		$w_txt8 = fopen("txt/8.txt","w") or die("Unable file");
+		$w_t8 = "0";
+		fwrite($w_txt8,$w_t8);
+		fclose($w_txt8);
+
+		$w_txt9 = fopen("txt/9.txt","w") or die("Unable file");
+		$w_t9 = "0";
+		fwrite($w_txt9,$w_t9);
+		fclose($w_txt9);
+
+		$w_txt10 = fopen("txt/10.txt","w") or die("Unable file");
+		$w_t10 = "0";
+		fwrite($w_txt10,$w_t10);
+		fclose($w_txt10);
+
+		
+	}
+
+
+
+?>
+    
+</p>
+
+</body>
+</html>
+
+<?PHP
+
+$read_txt1 = fopen("txt/1.txt","r") or die("Not Read File");
+$read_t1 = fread($read_txt1,filesize("txt/1.txt"));
+fclose($read_txt1);
+
+if($read_t1 == "1")
+{
+$LED1_STATUS = "ติด";
+$LED1_PIC="img/on.png";
+}
+if($read_t1 == "0")
+{
+$LED1_STATUS ="ไม่ติด";
+$LED1_PIC="img/off.png";
+}
+
+
+$read_txt2 = fopen("txt/2.txt","r") or die("Not Read File");
+$read_t2 = fread($read_txt2,filesize("txt/2.txt"));
+fclose($read_txt2);
+
+if($read_t2 == "1")
+{
+$LED2_STATUS = "ติด";
+$LED2_PIC="img/on.png";
+}
+if($read_t2 == "0")
+{
+$LED2_STATUS ="ไม่ติด";
+$LED2_PIC="img/off.png";
+}
+
+
+$read_txt3 = fopen("txt/3.txt","r") or die("Not Read File");
+$read_t3 = fread($read_txt3,filesize("txt/3.txt"));
+fclose($read_txt3);
+
+if($read_t3 == "1")
+{
+$LED3_STATUS = "ติด";
+$LED3_PIC="img/on.png";
+}
+if($read_t3 == "0")
+{
+$LED3_STATUS ="ไม่ติด";
+$LED3_PIC="img/off.png";
+}
+
+$read_txt4 = fopen("txt/4.txt","r") or die("Not Read File");
+$read_t4 = fread($read_txt4,filesize("txt/4.txt"));
+fclose($read_txt4);
+
+if($read_t4 == "1")
+{
+$LED4_STATUS = "ติด";
+$LED4_PIC="img/on.png";
+}
+if($read_t4 == "0")
+{
+$LED4_STATUS ="ไม่ติด";
+$LED4_PIC="img/off.png";
+}
+
+$read_txt5 = fopen("txt/5.txt","r") or die("Not Read File");
+$read_t5 = fread($read_txt5,filesize("txt/5.txt"));
+fclose($read_txt5);
+
+if($read_t5 == "1")
+{
+$LED5_STATUS = "ติด";
+$LED5_PIC="img/on.png";
+}
+if($read_t5 == "0")
+{
+$LED5_STATUS ="ไม่ติด";
+$LED5_PIC="img/off.png";
+}
+
+
+
+$read_txt6 = fopen("txt/6.txt","r") or die("Not Read File");
+$read_t6 = fread($read_txt6,filesize("txt/6.txt"));
+fclose($read_txt6);
+
+if($read_t6 == "1")
+{
+$LED6_STATUS = "ติด";
+$LED6_PIC="img/on.png";
+}
+if($read_t6 == "0")
+{
+$LED6_STATUS ="ไม่ติด";
+$LED6_PIC="img/off.png";
+}
+
+
+
+$read_txt7 = fopen("txt/7.txt","r") or die("Not Read File");
+$read_t7 = fread($read_txt7,filesize("txt/7.txt"));
+fclose($read_txt7);
+
+if($read_t7 == "1")
+{
+$LED7_STATUS = "ติด";
+$LED7_PIC="img/on.png";
+}
+if($read_t7 == "0")
+{
+$LED7_STATUS ="ไม่ติด";
+$LED7_PIC="img/off.png";
+}
+
+
+
+$read_txt8 = fopen("txt/8.txt","r") or die("Not Read File");
+$read_t8 = fread($read_txt8,filesize("txt/8.txt"));
+fclose($read_txt8);
+
+if($read_t8 == "1")
+{
+$LED8_STATUS = "ติด";
+$LED8_PIC="img/on.png";
+}
+if($read_t8 == "0")
+{
+$LED8_STATUS ="ไม่ติด";
+$LED8_PIC="img/off.png";
+}
+
+
+
+
+$read_txt9 = fopen("txt/9.txt","r") or die("Not Read File");
+$read_t9 = fread($read_txt9,filesize("txt/9.txt"));
+fclose($read_txt9);
+
+if($read_t9 == "1")
+{
+$LED9_STATUS = "ติด";
+$LED9_PIC="img/on.png";
+}
+if($read_t9 == "0")
+{
+$LED9_STATUS ="ไม่ติด";
+$LED9_PIC="img/off.png";
+}
+
+
+
+
+$read_txt10 = fopen("txt/10.txt","r") or die("Not Read File");
+$read_t10 = fread($read_txt10,filesize("txt/10.txt"));
+fclose($read_txt10);
+
+if($read_t10 == "1")
+{
+$LED10_STATUS = "ติด";
+$LED10_PIC="img/on.png";
+}
+if($read_t10 == "0")
+{
+$LED10_STATUS ="ไม่ติด";
+$LED10_PIC="img/off.png";
+}
+
+
+echo "<center>";
+echo "<table width='300' border='1'>";
+echo "<tbody>";
+echo "     <tr>";
+echo "        <td style='text-align: center'>ลำดับ</td>";
+echo "        <td style='text-align: center'>ชื่อ</td>";
+echo "        <td style='text-align: center'>เปิด</td>";
+echo "        <td style='text-align: center'>ปิด</td>";
+echo "      </tr>";
+echo "     <tr>";
+echo "        <td style='text-align: center'>1</td>";
+echo "        <td style='text-align: center'>หลอดที่ 1</td>";
+echo "        <td style='text-align: center'>$LED1_STATUS</td>";
+echo "        <td style='text-align: center'><img src='$LED1_PIC'></td>";
+echo "      </tr>";
+echo "     <tr>";
+echo "        <td style='text-align: center'>2</td>";
+echo "        <td style='text-align: center'>หลอดที่ 2</td>";
+echo "        <td style='text-align: center'>$LED2_STATUS</td>";
+echo "        <td style='text-align: center'><img src='$LED2_PIC'></td>";
+echo "      </tr>";
+echo "     <tr>";
+echo "        <td style='text-align: center'>3</td>";
+echo "        <td style='text-align: center'>หลอดที่ 3</td>";
+echo "        <td style='text-align: center'>$LED3_STATUS</td>";
+echo "        <td style='text-align: center'><img src='$LED3_PIC'></td>";
+echo "      </tr>";
+echo "     <tr>";
+echo "        <td style='text-align: center'>4</td>";
+echo "        <td style='text-align: center'>หลอดที่ 4</td>";
+echo "        <td style='text-align: center'>$LED4_STATUS</td>";
+echo "        <td style='text-align: center'><img src='$LED4_PIC'></td>";
+echo "      </tr>";
+echo "     <tr>";
+echo "        <td style='text-align: center'>5</td>";
+echo "        <td style='text-align: center'>หลอดที่ 5</td>";
+echo "        <td style='text-align: center'>$LED5_STATUS</td>";
+echo "        <td style='text-align: center'><img src='$LED5_PIC'></td>";
+echo "      </tr>";
+echo "     <tr>";
+echo "        <td style='text-align: center'>6</td>";
+echo "        <td style='text-align: center'>หลอดที่ 6</td>";
+echo "        <td style='text-align: center'>$LED6_STATUS</td>";
+echo "        <td style='text-align: center'><img src='$LED6_PIC'></td>";
+echo "      </tr>";
+echo "     <tr>";
+echo "        <td style='text-align: center'>7</td>";
+echo "        <td style='text-align: center'>หลอดที่ 7</td>";
+echo "        <td style='text-align: center'>$LED7_STATUS</td>";
+echo "        <td style='text-align: center'><img src='$LED7_PIC'></td>";
+echo "      </tr>";
+echo "     <tr>";
+echo "        <td style='text-align: center'>8</td>";
+echo "        <td style='text-align: center'>หลอดที่ 8</td>";
+echo "        <td style='text-align: center'>$LED8_STATUS</td>";
+echo "        <td style='text-align: center'><img src='$LED8_PIC'></td>";
+echo "      </tr>";
+echo "     <tr>";
+echo "        <td style='text-align: center'>9</td>";
+echo "        <td style='text-align: center'>หลอดที่ 9</td>";
+echo "        <td style='text-align: center'>$LED9_STATUS</td>";
+echo "        <td style='text-align: center'><img src='$LED9_PIC'></td>";
+echo "      </tr>";
+echo "     <tr>";
+echo "        <td style='text-align: center'>10</td>";
+echo "        <td style='text-align: center'>หลอดที่ 10</td>";
+echo "        <td style='text-align: center'>$LED10_STATUS</td>";
+echo "        <td style='text-align: center'><img src='$LED10_PIC'></td>";
+echo "      </tr>";
+echo "</tbody>";
+echo "</table>";
+echo "</center>";
+?>
+
+
+
